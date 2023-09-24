@@ -54,8 +54,17 @@ const Blogs = ({user, emitUserChanges}) => {
 
     }
 
+    const sortBlogsByLikes = () => {
+        // sorting from Biggest to smaller
+        const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
+        setBlogs(sortedBlogs)
+    }
+
     return <>
         <h2>blogs</h2>
+        <div>
+            <button onClick={() => sortBlogsByLikes()}>Sort blogs by Likes</button>
+        </div>
         {message ? <Notification message={message.note} style={message.style}/> : <></>}
         <Togglable buttonLabel='Add Blog' ref={noteFormRef}>
             <BlogForm emitChanges={(data) => handleBlogAfterAdding(data)}/>
