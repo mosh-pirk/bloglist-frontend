@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import blogs from "../services/blogs.js";
 
-function BlogForm({emitChanges}) {
-    const [formData, setFormData] = useState({
-        title: "",
-        author: "",
-        url: "",
-    });
+
+const initDataForm = {
+    title: "",
+    author: "",
+    url: "",
+}
+function BlogForm(props) {
+    const [formData, setFormData] = useState(initDataForm);
+
+    useEffect(() => setFormData(initDataForm), [])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -19,7 +23,8 @@ function BlogForm({emitChanges}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
        const addedBolg = await blogs.createBlog(formData)
-        emitChanges(addedBolg)
+        setFormData(initDataForm)
+        props.emitChanges(addedBolg)
     };
 
     return (
