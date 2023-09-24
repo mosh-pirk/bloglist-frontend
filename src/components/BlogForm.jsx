@@ -50,7 +50,6 @@ function BlogForm(props) {
                         name="author"
                         value={formData.author}
                         onChange={handleChange}
-                        required
                     />
                 </div>
                 <div>
