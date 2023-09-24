@@ -16,7 +16,7 @@ function LoginForm({emitUser}) {
         } else {
             try {
                 const user = await userService.login({username, password})
-                if (user && user.hasOwnProperty('token') && storeData.token) {
+                if (user && user.hasOwnProperty('token') && user.token) {
                     setLocalStorage('USER', user)
                 }
                 emitUser(user)
