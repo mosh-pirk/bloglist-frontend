@@ -41,6 +41,18 @@ const Blogs = ({user, emitUserChanges}) => {
         }, 5000);
     }
 
+    const handleModifiedBlog = (data) => {
+        const copyOfBlogs = [...blogs]
+        const add = copyOfBlogs.map((blog) => {
+            if (blog.id === data.id) {
+                return data;
+            }
+            return blog;
+        });
+
+        setBlogs(add)
+
+    }
 
     return <>
         <h2>blogs</h2>
@@ -50,7 +62,7 @@ const Blogs = ({user, emitUserChanges}) => {
         </Togglable>
 
         <p>{`${user.name} logged in`} <button onClick={() => logout()}>Log out</button></p>
-        {blogs.map(blog => <Blog key={blog.id} blog={blog}/>)}</>;
+        {blogs.map(blog => <Blog key={blog.id} blog={blog} emitNewBlog={(data) => handleModifiedBlog(data)}/>)}</>;
 }
 
 export default Blogs;
