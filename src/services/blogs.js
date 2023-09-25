@@ -1,4 +1,4 @@
-import {GET, PUT, POST} from "./api.js";
+import {GET, PUT, POST, DELETE} from "./api.js";
 
 
 const getAll = async () => {
@@ -13,4 +13,8 @@ const modifyBlog = async (id, data) => {
   return await PUT('api/blogs/' + id, data)
 }
 
-export default { getAll, createBlog, modifyBlog }
+const deleteBlog = async (id) => {
+  return await DELETE('api/blogs/' + id)
+}
+
+export default { getAll, createBlog, modifyBlog, deleteBlog }

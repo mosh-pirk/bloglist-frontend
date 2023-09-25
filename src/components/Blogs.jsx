@@ -54,6 +54,11 @@ const Blogs = ({user, emitUserChanges}) => {
 
     }
 
+    const handleBlogDeleting = (data) => {
+        const updatedBlogs =  [...blogs].filter((blogs) => blogs.id !== data.id)
+        setBlogs(updatedBlogs)
+    }
+
     const sortBlogsByLikes = () => {
         // sorting from Biggest to smaller
         const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
@@ -71,7 +76,7 @@ const Blogs = ({user, emitUserChanges}) => {
         </Togglable>
 
         <p>{`${user.name} logged in`} <button onClick={() => logout()}>Log out</button></p>
-        {blogs.map(blog => <Blog key={blog.id} blog={blog} emitNewBlog={(data) => handleModifiedBlog(data)}/>)}</>;
+        {blogs.map(blog => <Blog key={blog.id} blog={blog} emitNewBlog={(data) => handleModifiedBlog(data)} emitDeleting={(data) => handleBlogDeleting(data)} />)}</>;
 }
 
 export default Blogs;
