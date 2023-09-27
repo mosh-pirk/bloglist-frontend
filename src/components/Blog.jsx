@@ -1,8 +1,7 @@
-import {useState} from "react";
-import blogs from "../services/blogs.js";
-import user from "../services/user.js";
+import { useState } from 'react'
+import blogs from '../services/blogs.js'
 
-const Blog = ({ blog, emitNewBlog, emitDeleting}) => {
+const Blog = ({ blog, emitNewBlog, emitDeleting }) => {
   const [showData, setShowData] = useState(false)
   const blogStyle = {
     paddingTop: 10,
@@ -13,7 +12,7 @@ const Blog = ({ blog, emitNewBlog, emitDeleting}) => {
   }
 
   const handleLike = async () => {
-    const blogCopy = {...blog}
+    const blogCopy = { ...blog }
     blogCopy.likes = blog.likes + 1
     delete blogCopy.user
     try {
@@ -26,29 +25,29 @@ const Blog = ({ blog, emitNewBlog, emitDeleting}) => {
 
   }
 
-   const handleBlogDelete = async () => {
-     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}` )) {
-       try {
-         await blogs.deleteBlog(blog.id)
-         emitDeleting(blog)
-       } catch (error) {
-         console.log(error)
-       }
+  const handleBlogDelete = async () => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}` )) {
+      try {
+        await blogs.deleteBlog(blog.id)
+        emitDeleting(blog)
+      } catch (error) {
+        console.log(error)
+      }
 
-     }
+    }
   }
 
   return (<div style={blogStyle}>
     <div><span>{blog.title}</span> <button onClick={() => setShowData(!showData)}> {showData ? 'Hide' : 'View'}</button> </div>
     {
-        showData && <div>
-          <p><span>Url: </span><a href={blog.url}>{blog.url}</a></p>
-          <p><span>Likes: </span><span>{blog.likes ?? 0}</span><button onClick={() => handleLike()} >Like</button></p>
-          <p><span>Author: </span><span>{blog.author}</span></p>
-          <p><span>Add By: </span><span>{blog?.user?.name}</span></p>
-          <button onClick={() => handleBlogDelete()} >Remove</button>
+      showData && <div>
+        <p><span>Url: </span><a href={blog.url}>{blog.url}</a></p>
+        <p><span>Likes: </span><span>{blog.likes ?? 0}</span><button onClick={() => handleLike()} >Like</button></p>
+        <p><span>Author: </span><span>{blog.author}</span></p>
+        <p><span>Add By: </span><span>{blog?.user?.name}</span></p>
+        <button onClick={() => handleBlogDelete()} >Remove</button>
 
-        </div>
+      </div>
     }
   </div>)
 }

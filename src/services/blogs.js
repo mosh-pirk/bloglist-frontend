@@ -1,4 +1,4 @@
-import {GET, PUT, POST, DELETE} from "./api.js";
+import { GET, PUT, POST, DELETE } from './api.js'
 
 
 const getAll = async () => {
